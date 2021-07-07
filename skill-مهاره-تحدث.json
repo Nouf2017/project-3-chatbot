@@ -1,0 +1,296 @@
+{
+  "intents": [
+    {
+      "intent": "ترحيب",
+      "examples": [
+        {
+          "text": "GOOD MORNING"
+        },
+        {
+          "text": "السلام عليكم"
+        },
+        {
+          "text": "اهلا"
+        },
+        {
+          "text": "جوود مورننق"
+        },
+        {
+          "text": "مرحبا"
+        },
+        {
+          "text": "هلا"
+        },
+        {
+          "text": "هلو"
+        },
+        {
+          "text": "وعليكم السلام"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "خدمات",
+      "examples": [
+        {
+          "text": "ربوت تقديم قهوه"
+        },
+        {
+          "text": "شراء ربوت"
+        },
+        {
+          "text": "لتقديم خدمة العملاء"
+        },
+        {
+          "text": "ماهي الخدمات المقدمه"
+        },
+        {
+          "text": "نعم"
+        },
+        {
+          "text": "نعم اريد ربوت"
+        },
+        {
+          "text": "هل توجد لديكم خدمه الايجار ؟"
+        },
+        {
+          "text": "هل لديكم خدمه ؟"
+        },
+        {
+          "text": "هل لديكم خدمه اضافه تعديلات ؟"
+        },
+        {
+          "text": "هل لديكم ضمان ؟"
+        },
+        {
+          "text": "هل يوجد خدمه مابعد البيع ؟"
+        }
+      ],
+      "description": ""
+    }
+  ],
+  "entities": [
+    {
+      "entity": "sys-date",
+      "values": [],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "sys-time",
+      "values": [],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "dialog_nodes": [
+    {
+      "type": "event_handler",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "ماهو اليوم المناسب "
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "slot_2_1625353330449",
+      "event_name": "focus",
+      "dialog_node": "handler_3_1625353330449",
+      "previous_sibling": "handler_9_1625353330449"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "اي وقت يمكن تسليمه "
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "slot_7_1625353354387",
+      "event_name": "focus",
+      "dialog_node": "handler_5_1625353354388",
+      "previous_sibling": "handler_8_1625353354388"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_7_1625353354387",
+      "context": {
+        "time": "@sys-time"
+      },
+      "conditions": "@sys-time",
+      "event_name": "input",
+      "dialog_node": "handler_8_1625353354388"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_2_1625353330449",
+      "context": {
+        "date": "@sys-date"
+      },
+      "conditions": "@sys-date",
+      "event_name": "input",
+      "dialog_node": "handler_9_1625353330449"
+    },
+    {
+      "type": "standard",
+      "title": "ترحيب ",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "اهلا بك .. تفضل "
+              },
+              {
+                "text": "نورتنا "
+              },
+              {
+                "text": "كيف استطيع خدمتك "
+              },
+              {
+                "text": "اهلا بك في موقعنا "
+              },
+              {
+                "text": "وعليكم السلام "
+              },
+              {
+                "text": "يا هلا اسالني "
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "random"
+          }
+        ]
+      },
+      "conditions": "#ترحيب",
+      "dialog_node": "node_3_1625349431274",
+      "previous_sibling": "مرحبا"
+    },
+    {
+      "type": "frame",
+      "title": "خدمات ",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "ماهي نوع الخدمه ؟"
+              },
+              {
+                "text": "مانوع الربوت المطلوب ؟ "
+              },
+              {
+                "text": "حسنا "
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#خدمات",
+      "dialog_node": "node_9_1625352051451",
+      "previous_sibling": "node_3_1625349431274"
+    },
+    {
+      "type": "slot",
+      "parent": "node_9_1625352051451",
+      "variable": "$date",
+      "dialog_node": "slot_2_1625353330449"
+    },
+    {
+      "type": "slot",
+      "parent": "node_9_1625352051451",
+      "variable": "$time",
+      "dialog_node": "slot_7_1625353354387",
+      "previous_sibling": "slot_2_1625353330449"
+    },
+    {
+      "type": "standard",
+      "title": "اهلا بك ",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "لم أفهم، يمكنك محاولة اعادة الصياغة"
+              },
+              {
+                "text": "هل يمكنك اعادة صياغة عبارتك؟ أنا لا فهم"
+              },
+              {
+                "text": "لم أفهم قصدك"
+              },
+              {
+                "text": "وعليكم السلام "
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "أي شيء آخر",
+      "previous_sibling": "node_9_1625352051451",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "standard",
+      "title": "مرحبا ",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": ""
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "welcome",
+      "dialog_node": "مرحبا"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "disambiguation": {
+      "prompt": ":هل قصدت",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "كل ما سبق خطأ"
+    },
+    "human_agent_assist": {
+      "prompt": ":هل قصدت"
+    }
+  },
+  "learning_opt_out": false,
+  "name": "مهاره تحدث",
+  "language": "ar",
+  "description": ""
+}
